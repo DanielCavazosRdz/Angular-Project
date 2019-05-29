@@ -1,0 +1,17 @@
+<mat-grid-list cols="2" rowHeight="2:1">
+  <mat-grid-tile *ngFor="let post of posts">
+    <a style="width: 100%; height: 100%; position: relative;" href="#">
+      <div [style.backgroundImage]="setBg(post.image)"
+       style="width: 100%; height: 100%; padding: 30px; box-sizing: border-box; background-size: cover; color: white;
+       font-family: sans-serif">
+        <h3 style="display: block;">{{post.title}}</h3>
+        <p style="display: block;">{{post.comments.length}} comments</p>
+        <p style="display: block;">{{post.shortDescription}}</p>
+        <p style="display: block; position: absolute; bottom: 0;">{{post.category}}</p>
+      </div>
+    </a>
+    <div>
+      <!-- this is where the edit and delete buttons go on hover -->
+    </div>
+  </mat-grid-tile>
+
