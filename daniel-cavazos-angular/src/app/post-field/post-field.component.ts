@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Post } from '../post';
 import { PostsService } from '../posts.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { CategoryService } from '../category.service';
 
 @Component({
   selector: 'app-post-field',
@@ -12,20 +13,26 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class PostFieldComponent implements OnInit {
 
   posts: Post[];
+  public category: string;
 
-  constructor(private postService: PostsService, private sanitization: DomSanitizer) { }
+  constructor(private postService: PostsService, private sanitization: DomSanitizer, private categoryService: CategoryService) { }
 
   getPosts(): void {
     this.postService.getPosts()
     .subscribe(posts => this.posts = posts);
   }
 
-  ngOnInit() {
-    this.getPosts();
+  getCategory(): void {
+    this.categoryService.getCategory()
   }
 
-  setBg(imagen) {
-    return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(${imagen})`);
+  ngOnInit() {
+    this.getPosts();
+    this.category = '';
+  }
+
+  setBg(image) {
+    return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(${image})`);
   }
 
 

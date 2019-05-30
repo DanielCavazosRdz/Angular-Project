@@ -1,3 +1,4 @@
-<div style="text-align: center;">
-  <button mat-stroked-button (click)="doFilter()">placeholder</button>
+<div>
+  <button mat-stroked-button class="focus" (click)="clearFilter()">All</button>
+  <button mat-stroked-button class="focus" *ngFor="let category of categories" (click)="doFilter(category)">{{category}}</button>
 </div>

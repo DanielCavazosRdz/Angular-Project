@@ -6,17 +6,22 @@ import { AppComponent } from './app.component';
 import { AddPostComponent } from './add-post/add-post.component';
 import { FiltersComponent } from './filters/filters.component';
 import { PostFieldComponent } from './post-field/post-field.component';
+import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatIconModule, MatGridListModule} from '@angular/material';
+import {MatButtonModule, MatIconModule, MatGridListModule, MatDialogModule,
+  MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import { PostModalComponent } from './post-modal/post-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddPostComponent,
     FiltersComponent,
-    PostFieldComponent
+    PostFieldComponent,
+    PostModalComponent
   ],
+  entryComponents: [ PostModalComponent ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -24,7 +29,12 @@ import {MatButtonModule, MatIconModule, MatGridListModule} from '@angular/materi
     MatButtonModule,
     MatIconModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    FormsModule,
+    MatInputModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
