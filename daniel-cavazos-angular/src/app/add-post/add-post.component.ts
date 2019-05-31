@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Observable } from 'rxjs';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { Post } from '../post';
@@ -10,7 +11,7 @@ import { Post } from '../post';
 })
 export class AddPostComponent implements OnInit {
 
-  post: Post;
+  @Output() post: EventEmitter<Post> = new EventEmitter();
 
   constructor(public dialog: MatDialog) {}
 
@@ -18,14 +19,17 @@ export class AddPostComponent implements OnInit {
   }
 
   createPost() {
-
+    console.log('it gets here');
+    this.post.emit();
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(PostModalComponent, {
-      width: '250px'
+      width: '50%'
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.beforeClosed().subscribe(result => {
+      this.post = dialogRef.componentInstance.newPost;
+      this.createPost();
       console.log('The dialog was closed');
     });
   }

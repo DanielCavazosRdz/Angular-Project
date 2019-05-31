@@ -1,6 +1,6 @@
 <mat-grid-list cols="2" rowHeight="2:1">
   <div *ngFor="let post of posts">
-    <mat-grid-tile *ngIf="!category || post.category === 'lifestyle'" class="post">
+    <mat-grid-tile *ngIf="!category || post.category === category" class="post">
         <a style="width: 100%; height: 100%; position: relative;" href="#">
           <div [style.backgroundImage]="setBg(post.image)" class="tileImage">
             <h3 class="title">{{post.title}}</h3>

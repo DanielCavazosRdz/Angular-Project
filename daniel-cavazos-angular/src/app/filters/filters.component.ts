@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../categories.service';
 import { CategoryService } from '../category.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -12,6 +13,8 @@ export class FiltersComponent implements OnInit {
   constructor(private categoriesService: CategoriesService, private categoryService: CategoryService) { }
 
   categories = [];
+  categoryObservable: Observable<string>;
+  category: string;
 
   myObserver = {
     next: x => this.categories = x,

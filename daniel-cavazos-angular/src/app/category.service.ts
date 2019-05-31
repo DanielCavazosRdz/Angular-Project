@@ -1,21 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
 
-  category: Observable<string>;
+  categoryObservable: Subject<string> = new Subject<string>();
+  category: string;
 
   constructor() { }
 
   setCategory(category: string): void {
-    this.category
+    this.category = category;
+    this.setObservable();
   }
 
-  getCategory(): Observable<string> {
-    return this.category;
+  getCategory(): Subject<string> {
+    return this.categoryObservable;
+  }
+
+  setObservable() {
+    this.categoryObservable.next(this.category);
   }
 
 }

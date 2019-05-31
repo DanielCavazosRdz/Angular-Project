@@ -3,7 +3,7 @@
   <h1>Discovering the World</h1>
 </header>
 <router-outlet></router-outlet>
-<app-add-post></app-add-post>
+<app-add-post (post)="getNewPost($event)"></app-add-post>
 <br>
 <app-filters></app-filters>
-<app-post-field></app-post-field>
+<app-post-field [addedPost]="newPost"></app-post-field>

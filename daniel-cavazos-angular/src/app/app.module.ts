@@ -8,9 +8,9 @@ import { FiltersComponent } from './filters/filters.component';
 import { PostFieldComponent } from './post-field/post-field.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatIconModule, MatGridListModule, MatDialogModule,
-  MatFormFieldModule, MatInputModule, MatSelectModule} from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatIconModule, MatGridListModule, MatDialogModule,
+  MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
 import { PostModalComponent } from './post-modal/post-modal.component';
 
 @NgModule({
@@ -34,7 +34,7 @@ import { PostModalComponent } from './post-modal/post-modal.component';
     MatFormFieldModule,
     FormsModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

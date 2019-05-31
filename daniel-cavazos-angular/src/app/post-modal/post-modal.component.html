@@ -1,33 +1,34 @@
-<h1 mat-dialog-title>Create Post</h1>
+<h1 class="createTitle" mat-dialog-title>Create Post</h1>
+<h1 class="editTitle" mat-dialog-title>Edit Post</h1>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field class="modalInput">
     <input matInput placeholder="Title" [(ngModel)]="post.title">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field class="modalInput">
     <input matInput placeholder="Short Description" [(ngModel)]="post.shortDescription">
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-    <mat-form-field>
+    <mat-form-field class="modalInput">
       <input matInput placeholder="Description" [(ngModel)]="post.description">
     </mat-form-field>
   </div>
 <div mat-dialog-content>
-  <mat-form-field>
-    <mat-select #fontSize placeholder="Category">
+  <mat-form-field class="modalInput">
+    <mat-select [(ngModel)]="post.category" placeholder="Category">
       <mat-option *ngFor="let category of categories" value="{{category}}">{{category}}</mat-option>
     </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-content>
-  <mat-form-field>
+  <mat-form-field class="modalInput">
     <input matInput placeholder="URL of the image" [(ngModel)]="post.image">
   </mat-form-field>
 </div>
 
 <div mat-dialog-actions>
   <button mat-flat-button (click)="onCancel()">Cancel</button>
-  <button mat-flat-button color="primary">Save</button>
+  <button mat-flat-button (click)="onCreate()" color="primary">Save</button>
 </div>
