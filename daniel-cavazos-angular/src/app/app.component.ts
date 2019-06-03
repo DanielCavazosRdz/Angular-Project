@@ -1,8 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {MatDialog} from '@angular/material';
-import { Observable } from 'rxjs';
-import { Post } from './post';
-import { AddPostComponent } from './add-post/add-post.component';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -12,7 +8,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 })
 export class AppComponent implements OnInit {
 
-  constructor( private dialog: MatDialog) {}
+  constructor() {}
 
   ngOnInit() {
 

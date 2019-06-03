@@ -10,8 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule, MatIconModule, MatGridListModule, MatDialogModule,
-  MatFormFieldModule, MatInputModule, MatSelectModule } from '@angular/material';
+  MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonToggleModule } from '@angular/material';
 import { PostModalComponent } from './post-modal/post-modal.component';
+import { PostDetailsModule } from './post-details/post-details.module';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { PostModalComponent } from './post-modal/post-modal.component';
     AddPostComponent,
     FiltersComponent,
     PostFieldComponent,
-    PostModalComponent
+    PostModalComponent,
+    HomeComponent,
   ],
   entryComponents: [ PostModalComponent ],
   imports: [
@@ -35,6 +38,8 @@ import { PostModalComponent } from './post-modal/post-modal.component';
     FormsModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonToggleModule,
+    PostDetailsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

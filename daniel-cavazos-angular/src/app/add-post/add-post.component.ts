@@ -1,8 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { Observable } from 'rxjs';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import { PostModalComponent } from '../post-modal/post-modal.component';
-import { Post } from '../post';
 
 @Component({
   selector: 'app-add-post',

@@ -1,0 +1,10 @@
+<div [style.backgroundImage]="setBg(post.image)" class="hero-image">
+  <button routerLink="/posts">View Posts</button>
+  <div class="hero-text">
+    <h1>{{post.title}}</h1>
+  </div>
+</div>
+<p>{{post.shortDescription}}</p>
+<p>{{post.description}}</p>
+
+<app-comments></app-comments>

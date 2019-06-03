@@ -23,16 +23,26 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-    return this.postsObservable = this.http.get<Post[]>(this.postsUrl).pipe(map(data => this.posts = data, this.$postsChange.next(this.posts)));
+    return this.postsObservable = this.http.get<Post[]>(this.postsUrl).pipe(
+      map(data => this.posts = data, this.$postsChange.next(this.posts)));
   }
 
-  getPost(id: number): Observable<Post> {
-    const url = `${this.postsUrl}/${id}`;
-    return this.http.get<Post>(url);
+  getPost(id: number): Post {
+    for (let data of this.posts) {
+      if(data.id === id) {
+        return data;
+      }
+    }
   }
 
-  updatePost(post: Post): Observable<any> {
-    return this.http.put(this.postsUrl, post, httpOptions);
+  updatePost(post: Post): void { // Observable<Post> might be used in the futer with an api
+    for (let data of this.posts) {
+      if(data === post) {
+        data = post;
+      }
+    }
+    this.$postsChange.next(this.posts);
+    // return this.http.put(this.postsUrl, post, httpOptions);
   }
 
   addPost(post: Post): void {
@@ -40,14 +50,19 @@ export class PostsService {
     this.counter++;
     this.posts.push(post);
     this.$postsChange.next(this.posts);
-    //return this.http.add<Post>(this.postsUrl, post, httpOptions);      //this is to return to the http, the added property, probably useful for when you have an api
+    // return this.http.add<Post>(this.postsUrl, post, httpOptions);
+    // this is to return to the http, the added property, probably useful for when you have an api
   }
 
-  deletePost(post: Post): void {                           //might return an Observable<Post> with an api
-    console.log('it goes in here, and the id is: ' + post.id);
-    this.posts = this.posts.filter(data => data !== post);
+  deletePost(post: Post): void {   // might return an Observable<Post> with an api
+    // this.posts = this.posts.filter(data => data !== post);  //for some reason, sort of freezes post-field
+    for (let data of this.posts) {
+      if(data === post) {
+        this.posts.splice(this.posts.indexOf(data), 1);
+      }
+    }
     console.log(this.posts);
-    this.$postsChange.next(this.posts);   //for some reason, sort of freezes post-field
+    this.$postsChange.next(this.posts);
     // const id = typeof post === 'number' ? post : post.id;
     // const url = `${this.postsUrl}/${id}`;
     // return this.http.delete<Post>(url, httpOptions);

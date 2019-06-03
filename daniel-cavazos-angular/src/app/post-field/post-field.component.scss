@@ -10,6 +10,10 @@
   background-color: transparent;
 }
 
+.fieldOfPosts {
+  position: unset;
+}
+
 .post:hover > .overlay {
   width:100%;
   height:100%;
@@ -20,8 +24,8 @@
 }
 
 .tile {
-  width: 100%; 
-  height: 100%; 
+  width: 100%;
+  height: 100%;
   position: relative;
 }
 

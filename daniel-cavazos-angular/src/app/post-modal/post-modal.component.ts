@@ -12,6 +12,7 @@ import { PostsService } from '../posts.service';
 export class PostModalComponent implements OnInit {
 
   categories: [];
+  title: string;
   post: Post = {
     id: 0,
     title: '',
@@ -19,12 +20,13 @@ export class PostModalComponent implements OnInit {
     shortDescription: '',
     description: '',
     publishedAt: '',
-    image: '',
+    image: 'https://source.unsplash.com/random',
     comments: []
   };
+  originalPost: Post = new Post();
 
   constructor(private postService: PostsService, private categoriesService: CategoriesService,
-              public dialogRef: MatDialogRef<PostModalComponent>) { }
+              public dialogRef: MatDialogRef<PostModalComponent>, @Inject(MAT_DIALOG_DATA) public data:Post) { }
 
   categoryObserver = {
     next: x => this.categories = x,
@@ -44,17 +46,31 @@ export class PostModalComponent implements OnInit {
   }
 
   onCancel(): void {
+    console.log(this.data.title + ' also the thing in the input: ' + this.originalPost.title);
+    this.post = this.data;
     this.dialogRef.close();
   }
 
+  onEdit(): void {
+    this.postService.updatePost(this.post);
+  }
+
   onCreate(): void {
-    this.postService.addPost(this.post);
-    this.onCancel();
+    if(this.data){this.onEdit();}
+    else{
+      this.postService.addPost(this.post);
+    }
+    this.dialogRef.close();
   }
 
   ngOnInit() {
     this.getCategories();
-    console.log(this.categories);
+    if(this.data) {
+      this.post = this.data;
+      this.originalPost = this.post;
+      this.title = 'Edit Post';
+    } else {this.title = 'Create Post';}
+
   }
 
 }

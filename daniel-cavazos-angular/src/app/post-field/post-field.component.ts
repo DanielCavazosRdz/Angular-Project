@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Post } from '../post';
+import { MatDialog } from '@angular/material';
+import { PostModalComponent } from '../post-modal/post-modal.component';
 import { PostsService } from '../posts.service';
-import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CategoryService } from '../category.service';
 
@@ -16,7 +17,8 @@ export class PostFieldComponent implements OnInit {
   posts: Post[];
   public category: string;
 
-  constructor(private postService: PostsService, private sanitization: DomSanitizer, private categoryService: CategoryService) { }
+  constructor(public dialog: MatDialog, private postService: PostsService,
+     private sanitization: DomSanitizer, private categoryService: CategoryService) { }
 
   getPosts(): void {
     this.postService.getPosts()
@@ -38,11 +40,18 @@ export class PostFieldComponent implements OnInit {
     this.postService.deletePost(post);
   }
 
-  
+  editPost(post: Post): void {
+    const dialogRef = this.dialog.open(PostModalComponent, {
+      width: '50%',
+      data: post
+    });
+    dialogRef.beforeClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 
   setBg(image: string) {
     return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(${image})`);
   }
-
 
 }

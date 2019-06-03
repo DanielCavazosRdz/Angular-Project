@@ -1,4 +1,6 @@
 <div>
-  <button mat-stroked-button class="focus" (click)="clearFilter()">All</button>
-  <button mat-stroked-button class="focus" *ngFor="let category of categories" (click)="doFilter(category)">{{category}}</button>
+  <mat-button-toggle-group>
+    <mat-button-toggle class="filterButtons" (click)="clearFilter()">All</mat-button-toggle>
+    <mat-button-toggle class="filterButtons" *ngFor="let category of categories" (click)="doFilter(category)">{{category}}</mat-button-toggle>
+  </mat-button-toggle-group>
 </div>
