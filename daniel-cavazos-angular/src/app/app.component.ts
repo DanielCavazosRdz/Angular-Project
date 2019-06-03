@@ -12,16 +12,7 @@ import { AddPostComponent } from './add-post/add-post.component';
 })
 export class AppComponent implements OnInit {
 
-  newPost: Observable<Post>;
-
   constructor( private dialog: MatDialog) {}
-
-
-  getNewPost(event: Observable<Post>) {
-    console.log('it gets here 2');
-    console.log(event);
-    this.newPost = event;
-  }
 
   ngOnInit() {
 

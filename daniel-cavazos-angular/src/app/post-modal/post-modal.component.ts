@@ -11,8 +11,6 @@ import { PostsService } from '../posts.service';
 })
 export class PostModalComponent implements OnInit {
 
-  @Output() newPost: EventEmitter<Post> = new EventEmitter();
-
   categories: [];
   post: Post = {
     id: 0,
@@ -22,7 +20,7 @@ export class PostModalComponent implements OnInit {
     description: '',
     publishedAt: '',
     image: '',
-    comments: [null]
+    comments: []
   };
 
   constructor(private postService: PostsService, private categoriesService: CategoriesService,
@@ -30,12 +28,6 @@ export class PostModalComponent implements OnInit {
 
   categoryObserver = {
     next: x => this.categories = x,
-    error: err => console.error('Observer got an error: ' + err),
-    complete: () => console.log('Observer got a complete notification'),
-  };
-
-  postObserver = {
-    next: x => this.newPost.emit(x),
     error: err => console.error('Observer got an error: ' + err),
     complete: () => console.log('Observer got a complete notification'),
   };
@@ -56,7 +48,8 @@ export class PostModalComponent implements OnInit {
   }
 
   onCreate(): void {
-    this.postService.addPost(this.post).subscribe(this.postObserver);
+    this.postService.addPost(this.post);
+    this.onCancel();
   }
 
   ngOnInit() {

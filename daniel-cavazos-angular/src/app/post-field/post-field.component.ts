@@ -13,28 +13,14 @@ import { CategoryService } from '../category.service';
 })
 export class PostFieldComponent implements OnInit {
 
-  @Input() addedPost: Observable<Post>;
-
   posts: Post[];
   public category: string;
-  myObserver = {
-    next: x => this.posts = x,
-    error: err => console.error('Observer got an error: ' + err),
-    complete: () => console.log('Observer got a complete notification'),
-  };
-
-  newPostObserver = {
-    next: x => this.posts = x,
-    error: err => console.error('Observer got an error: ' + err),
-    complete: () => console.log('Observer got a complete notification'),
-  };
 
   constructor(private postService: PostsService, private sanitization: DomSanitizer, private categoryService: CategoryService) { }
 
   getPosts(): void {
     this.postService.getPosts()
     .subscribe(posts => this.posts = posts);
-    this.addedPost.subscribe(this.newPostObserver);
   }
 
   getCategory(): void {
@@ -47,6 +33,12 @@ export class PostFieldComponent implements OnInit {
     this.category = '';
     this.getCategory();
   }
+
+  deletePost(post: Post): void {
+    this.postService.deletePost(post);
+  }
+
+  
 
   setBg(image: string) {
     return this.sanitization.bypassSecurityTrustStyle(`linear-gradient(rgba(0,0,0,0.2),rgba(0,0,0,0.2)), url(${image})`);

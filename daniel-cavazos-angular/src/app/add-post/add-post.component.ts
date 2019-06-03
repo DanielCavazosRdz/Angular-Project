@@ -11,16 +11,9 @@ import { Post } from '../post';
 })
 export class AddPostComponent implements OnInit {
 
-  @Output() post: EventEmitter<Post> = new EventEmitter();
-
   constructor(public dialog: MatDialog) {}
 
   ngOnInit() {
-  }
-
-  createPost() {
-    console.log('it gets here');
-    this.post.emit();
   }
 
   openDialog(): void {
@@ -28,8 +21,6 @@ export class AddPostComponent implements OnInit {
       width: '50%'
     });
     dialogRef.beforeClosed().subscribe(result => {
-      this.post = dialogRef.componentInstance.newPost;
-      this.createPost();
       console.log('The dialog was closed');
     });
   }

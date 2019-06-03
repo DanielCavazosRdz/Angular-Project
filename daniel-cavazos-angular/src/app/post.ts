@@ -6,9 +6,5 @@ export class Post {
   description: string;
   publishedAt: string;
   image: string;
-  comments: [{
-    id: number;
-    content: string;
-    author: string;
-  }]
+  comments: []
 }
