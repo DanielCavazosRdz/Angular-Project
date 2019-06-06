@@ -11,10 +11,15 @@ const httpOptions = {
 })
 export class CategoriesService {
   private categoriesUrl = 'http://private-c3edb-postsmock.apiary-mock.com/categories';
+  private categories: Observable<string>;
 
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<string> {
-    return this.http.get<string>(this.categoriesUrl);
+    return this.categories;
+  }
+
+  GetInfo(): void {
+    this.categories = this.http.get<string>(this.categoriesUrl);
   }
 }

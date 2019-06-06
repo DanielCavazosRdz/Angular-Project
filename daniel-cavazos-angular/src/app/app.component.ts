@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService } from './categories.service';
+import { PostsService } from './posts.service';
 
 
 @Component({
@@ -8,7 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
 
-  constructor() {}
+  constructor(private postService: PostsService, private categoriesService: CategoriesService) {
+    // calls the url to get the info needed
+    console.log('hello');
+    this.postService.getInfo();
+    this.categoriesService.GetInfo();
+  }
 
   ngOnInit() {
 

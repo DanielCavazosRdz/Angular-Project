@@ -23,8 +23,7 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-    return this.postsObservable = this.http.get<Post[]>(this.postsUrl).pipe(
-      map(data => this.posts = data, this.$postsChange.next(this.posts)));
+    return this.postsObservable;
   }
 
   getPost(id: number): Post {
@@ -66,6 +65,11 @@ export class PostsService {
     // const id = typeof post === 'number' ? post : post.id;
     // const url = `${this.postsUrl}/${id}`;
     // return this.http.delete<Post>(url, httpOptions);
+  }
+
+  getInfo(): void {
+    this.postsObservable = this.http.get<Post[]>(this.postsUrl).pipe(
+      map(data => this.posts = data, this.$postsChange.next(this.posts)));
   }
 
   giveId(post: Post): Post {

@@ -1,3 +1,17 @@
-<p>
-  comments works!
-</p>
+<h3>Comments</h3>
+<div *ngFor="let comment of post.comments">
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar><mat-icon>account_circle</mat-icon></div>
+      <mat-card-title>{{comment.author}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{comment.content}}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<mat-form-field class="modalInput">
+    <input matInput placeholder="Write a comment" [(ngModel)]="newComment">
+</mat-form-field>
+
