@@ -41,7 +41,7 @@ import { HomeComponent } from './home/home.component';
     MatButtonToggleModule,
     PostDetailsModule
   ],
-  providers: [],
+  providers: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

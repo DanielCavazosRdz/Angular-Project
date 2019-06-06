@@ -6,5 +6,5 @@ export class Post {
   description: string;
   publishedAt: string;
   image: string;
-  comments: []
+  comments: any[]
 }

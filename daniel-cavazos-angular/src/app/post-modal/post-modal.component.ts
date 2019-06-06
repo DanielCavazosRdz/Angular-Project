@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Post } from '../post';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { CategoriesService } from '../categories.service';

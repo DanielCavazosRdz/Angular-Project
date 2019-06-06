@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetailsComponent } from './details/details.component';
 import { CommentsComponent } from './details/comments/comments.component';
-import {MatCardModule} from '@angular/material/card';
-import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from '../app-routing.module';
-import {MatIconModule} from '@angular/material/icon';
-import { MatInputModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DetailsComponent, CommentsComponent],
@@ -16,7 +14,8 @@ import { MatInputModule } from '@angular/material';
     MatCardModule,
     MatIconModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    MatButtonModule
   ]
 })
 export class PostDetailsModule { }

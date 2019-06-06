@@ -21,21 +21,29 @@ export class CommentsComponent implements OnInit {
     comments: []
   };
 
+  id: string;
+
   newComment: string;
 
-  constructor(private postsService: PostsService, private route: ActivatedRoute) { }
+  constructor(private postsService: PostsService, private route: ActivatedRoute) {
+    this.id = this.route.snapshot.paramMap.get('id');
+   }
 
   ngOnInit() {
     this.getPost();
   }
 
   getPost(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    this.post = this.postsService.getPost(parseInt(id));
+    this.post = this.postsService.getPost(parseInt(this.id));
   }
 
   createComment(): void {
-
+    if(this.newComment){
+      this.post.comments.push({id: this.post.comments.length + 1 ,author: 'Jon Doe' ,content: this.newComment});
+      this.postsService.updatePost(this.post);
+      this.post = this.postsService.getPost(parseInt(this.id));
+      this.newComment = '';
+    }
   }
 
 }

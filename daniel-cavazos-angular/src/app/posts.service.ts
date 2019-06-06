@@ -14,6 +14,7 @@ const httpOptions = {
 export class PostsService {
 
   private postsUrl = 'https://private-c3edb-postsmock.apiary-mock.com/posts';
+  // private postsUrl = 'http://localhost:3000/posts';  //the way you would communicate to the db
   private posts = [];
   $postsChange = new Subject<Post[]>();
   postsObservable = new Observable<Post[]>();
@@ -23,6 +24,7 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
+    this.http.get('http://localhost:3000/posts').subscribe((response)=>console.log(response))
     return this.postsObservable;
   }
 
