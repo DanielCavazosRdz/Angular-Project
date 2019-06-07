@@ -10,7 +10,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class CategoriesService {
-  private categoriesUrl = 'http://private-c3edb-postsmock.apiary-mock.com/categories';
+  private categoriesUrl = 'http://localhost:3000/categories';
   private categories: Observable<string>;
 
   constructor(private http: HttpClient) { }

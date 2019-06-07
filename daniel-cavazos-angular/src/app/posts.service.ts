@@ -13,21 +13,20 @@ const httpOptions = {
 })
 export class PostsService {
 
-  private postsUrl = 'https://private-c3edb-postsmock.apiary-mock.com/posts';
-  // private postsUrl = 'http://localhost:3000/posts';  //the way you would communicate to the db
+  private postsUrl = 'http://localhost:3000/posts'; // the way you would communicate to the db
   private posts = [];
   $postsChange = new Subject<Post[]>();
   postsObservable = new Observable<Post[]>();
-  counter  = 10;
+  counter  = 1;
 
 
   constructor(private http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-    this.http.get('http://localhost:3000/posts').subscribe((response)=>console.log(response))
     return this.postsObservable;
   }
 
+  // no call from the localhost needed, since the observable has the same info as the database
   getPost(id: number): Post {
     for (let data of this.posts) {
       if(data.id === id) {
@@ -36,47 +35,42 @@ export class PostsService {
     }
   }
 
-  updatePost(post: Post): void { // Observable<Post> might be used in the futer with an api
+  updatePost(post: Post) {
     for (let data of this.posts) {
       if(data === post) {
         data = post;
       }
     }
     this.$postsChange.next(this.posts);
-    // return this.http.put(this.postsUrl, post, httpOptions);
+    console.log(post.id);
+    this.http.put(this.postsUrl, post, httpOptions).subscribe((x)=>x);
   }
 
-  addPost(post: Post): void {
+  addPost(post: Post) {
+    for(let post of this.posts){
+      this.counter = this.counter + post.id;
+    }
     post.id = this.counter;
-    this.counter++;
     this.posts.push(post);
     this.$postsChange.next(this.posts);
-    // return this.http.add<Post>(this.postsUrl, post, httpOptions);
-    // this is to return to the http, the added property, probably useful for when you have an api
+    this.http.post(this.postsUrl, post, httpOptions).subscribe((x)=>x);
   }
 
-  deletePost(post: Post): void {   // might return an Observable<Post> with an api
-    // this.posts = this.posts.filter(data => data !== post);  //for some reason, sort of freezes post-field
+  deletePost(post: Post) {
     for (let data of this.posts) {
       if(data === post) {
         this.posts.splice(this.posts.indexOf(data), 1);
       }
     }
-    console.log(this.posts);
     this.$postsChange.next(this.posts);
-    // const id = typeof post === 'number' ? post : post.id;
-    // const url = `${this.postsUrl}/${id}`;
-    // return this.http.delete<Post>(url, httpOptions);
+    const id = typeof post === 'number' ? post : post.id;
+    const url = `${this.postsUrl}?id=${id}`;
+    this.http.delete<Post>(url).subscribe((x)=>x);
   }
 
   getInfo(): void {
     this.postsObservable = this.http.get<Post[]>(this.postsUrl).pipe(
       map(data => this.posts = data, this.$postsChange.next(this.posts)));
-  }
-
-  giveId(post: Post): Post {
-
-    return null;
   }
 
 }

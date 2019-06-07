@@ -16,6 +16,7 @@ export class PostFieldComponent implements OnInit {
 
   posts: Post[];
   public category: string;
+  columns = 2;
 
   constructor(public dialog: MatDialog, private postService: PostsService,
      private sanitization: DomSanitizer, private categoryService: CategoryService) { }
@@ -34,6 +35,11 @@ export class PostFieldComponent implements OnInit {
     this.getPosts();
     this.category = '';
     this.getCategory();
+    if(window.innerWidth <= 770) {
+      this.columns = 1;
+    } else {
+      this.columns = 2;
+    }
   }
 
   deletePost(post: Post): void {
@@ -48,6 +54,14 @@ export class PostFieldComponent implements OnInit {
     dialogRef.beforeClosed().subscribe(result => {
       console.log('The dialog was closed');
     });
+  }
+
+  onResize() {
+    if(window.innerWidth <= 770) {
+      this.columns = 1;
+    } else {
+      this.columns = 2;
+    }
   }
 
   setBg(image: string) {
